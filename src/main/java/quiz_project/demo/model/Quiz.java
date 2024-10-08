@@ -25,6 +25,20 @@ public class Quiz {
     @OneToMany
     Questions questions;
 
+    @OneToMany
+    Score scores;
+
+    //Constructor
+
+    public Quiz(Long id, boolean visibility, String title, String created_at, Questions questions) {
+        this.id = id;
+        this.visibility = visibility;
+        this.title = title;
+        this.created_at = created_at;
+        this.questions = questions;
+    }
+
+
     // Getters e Setters
 
     public Long getId() {

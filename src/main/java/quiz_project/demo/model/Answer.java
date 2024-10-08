@@ -22,6 +22,21 @@ public class Answer {
     @ManyToOne
     Questions question_id;
 
+    @OneToMany
+    Score scores;
+
+
+    //Constructor
+
+    public Answer(Long id, String answer_text, boolean is_correct, String created_at, Questions question_id) {
+        this.id = id;
+        this.answer_text = answer_text;
+        this.is_correct = is_correct;
+        this.created_at = created_at;
+        this.question_id = question_id;
+    }
+
+
     // Getters e Setters
 
     public Long getId() {

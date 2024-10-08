@@ -3,8 +3,8 @@ package quiz_project.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "scores")
+public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,17 +18,23 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "created_at")
+    private String created_at;
+
+    @ManyToOne
+    Quiz quiz_id;
+
+    @ManyToOne
+    Answer answer_id;
 
     //Constructor
 
-    public User(Long id, String name, String lastname, String email, String password) {
+    public Score(Long id, String name, String lastname, String email, String created_at) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.email = email;
-        this.password = password;
+        this.created_at = created_at;
     }
 
 
@@ -38,7 +44,7 @@ public class User {
         return id;
     }
 
-    public User setId(Long id) {
+    public Score setId(Long id) {
         this.id = id;
         return this;
     }
@@ -47,7 +53,7 @@ public class User {
         return name;
     }
 
-    public User setName(String name) {
+    public Score setName(String name) {
         this.name = name;
         return this;
     }
@@ -56,7 +62,7 @@ public class User {
         return lastname;
     }
 
-    public User setLastname(String lastname) {
+    public Score setLastname(String lastname) {
         this.lastname = lastname;
         return this;
     }
@@ -65,17 +71,17 @@ public class User {
         return email;
     }
 
-    public User setEmail(String email) {
+    public Score setEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public String getPassword() {
-        return password;
+    public String getCreated_at() {
+        return created_at;
     }
 
-    public User setPassword(String password) {
-        this.password = password;
+    public Score setCreated_at(String created_at) {
+        this.created_at = created_at;
         return this;
     }
 
