@@ -23,7 +23,7 @@ public class Quiz {
     private String created_at;
 
     @OneToMany
-    List<Questions> questions;
+    Questions questions;
 
     // Getters e Setters
 

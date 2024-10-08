@@ -2,6 +2,8 @@ package quiz_project.demo.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "questions")
 public class Questions {
@@ -9,8 +11,6 @@ public class Questions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    // Getters e Setters
 
     @Column(name = "question_text")
     private String question_text;
@@ -21,9 +21,13 @@ public class Questions {
     @Column(name = "created_at")
     private String created_at;
 
-
     @ManyToOne
     Quiz quiz_id;
+
+    @OneToMany
+    Answer answers;
+
+    // Getters e Setters
 
     public Long getId() {
         return id;
