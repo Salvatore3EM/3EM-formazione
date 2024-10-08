@@ -24,20 +24,8 @@ public class Questions {
     @ManyToOne
     Quiz quiz_id;
 
-    @OneToMany
+    @ManyToOne
     Answer answers;
-
-    //Constructor
-
-    public Questions(Long id, String question_text, boolean visibility, String created_at, Quiz quiz_id, Answer answers) {
-        this.id = id;
-        this.question_text = question_text;
-        this.visibility = visibility;
-        this.created_at = created_at;
-        this.quiz_id = quiz_id;
-        this.answers = answers;
-    }
-
 
     // Getters e Setters
 

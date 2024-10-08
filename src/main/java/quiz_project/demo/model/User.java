@@ -21,17 +21,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    //Constructor
-
-    public User(Long id, String name, String lastname, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
-    }
-
-
     //Getters e Setters
 
     public Long getId() {

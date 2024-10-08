@@ -22,22 +22,11 @@ public class Quiz {
     @Column(name = "created_at")
     private String created_at;
 
-    @OneToMany
+    @ManyToOne
     Questions questions;
 
-    @OneToMany
+    @ManyToOne
     Score scores;
-
-    //Constructor
-
-    public Quiz(Long id, boolean visibility, String title, String created_at, Questions questions) {
-        this.id = id;
-        this.visibility = visibility;
-        this.title = title;
-        this.created_at = created_at;
-        this.questions = questions;
-    }
-
 
     // Getters e Setters
 

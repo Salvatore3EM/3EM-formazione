@@ -2,6 +2,8 @@ package quiz_project.demo.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "scores")
 public class Score {
@@ -24,19 +26,8 @@ public class Score {
     @ManyToOne
     Quiz quiz_id;
 
-    @ManyToOne
-    Answer answer_id;
-
-    //Constructor
-
-    public Score(Long id, String name, String lastname, String email, String created_at) {
-        this.id = id;
-        this.name = name;
-        this.lastname = lastname;
-        this.email = email;
-        this.created_at = created_at;
-    }
-
+    @ManyToMany
+    List<Answer> answer_id;
 
     //Getters e Setters
 

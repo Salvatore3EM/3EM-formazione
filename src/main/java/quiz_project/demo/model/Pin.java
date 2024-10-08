@@ -21,15 +21,6 @@ public class Pin {
     @Column(name = "end")
     private LocalDate end;
 
-    //Constructor
-
-    public Pin(LocalDate start, Long id, String pin_text, LocalDate end) {
-        this.start = start;
-        this.id = id;
-        this.pin_text = pin_text;
-        this.end = end;
-    }
-
     //Getters e Setters
 
     public Long getId() {
