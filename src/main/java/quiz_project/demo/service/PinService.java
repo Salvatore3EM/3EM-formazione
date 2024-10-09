@@ -6,6 +6,10 @@ import quiz_project.demo.model.Pin;
 import quiz_project.demo.repository.PinRepository;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -43,5 +47,34 @@ public class PinService {
 
     public void deletePin(Long id) {
         pinRepository.deleteById(id);
+    }
+
+    public Pin generatePin() {
+        Pin OldPin = pinRepository.findById(1L).orElse(null);
+        Pin localPin = new Pin();
+        List<Character> pinList = new ArrayList<>();
+
+        for (char i = '0'; i <= '9'; i++) {
+            pinList.add(i);
+        }
+
+        for (char c = 'A'; c <= 'Z'; c++) {
+            pinList.add(c);
+        }
+
+        // Shuffle list
+        Collections.shuffle(pinList);
+
+        // subList
+        StringBuilder sb = new StringBuilder();
+        for (char ch: pinList.subList(0,5)) {
+            sb.append(ch);
+        }
+        String Pin_text = sb.toString();
+        localPin.setPin_text(Pin_text);
+        localPin.setStart(LocalDateTime.from(LocalDateTime.now()));
+        localPin.setEnd(LocalDateTime.from(LocalDateTime.now().plusHours(1)));
+
+        return localPin;
     }
 }

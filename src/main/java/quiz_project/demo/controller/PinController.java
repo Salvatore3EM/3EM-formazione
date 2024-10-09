@@ -17,11 +17,6 @@ public class PinController {
     @GetMapping
     public List<Pin> getAllPin() { return pinService.getAllPins(); }
 
-    @GetMapping("/{id}")
-    public Pin getPinById(@PathVariable Long id) {
-        return pinService.getPinById(id);
-    }
-
     @PutMapping("/{id}")
     public void editPinById (@PathVariable Long Id, @RequestBody Pin NewPin) {
         pinService.editPinById(Id,NewPin);
@@ -33,7 +28,10 @@ public class PinController {
     }
 
     @PostMapping("/All")
-    public List<Pin> createPin(@RequestBody List<Pin> PinList) { return pinService.savePins(PinList); }
+    public List<Pin> createPins(@RequestBody List<Pin> PinList) { return pinService.savePins(PinList); }
+
+    @GetMapping("/generate")
+    public Pin generatePin() { return pinService.generatePin(); }
 
     @DeleteMapping("/{id}")
     public void deletePin(@PathVariable Long id) {
