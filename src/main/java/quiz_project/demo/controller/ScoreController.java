@@ -15,23 +15,6 @@ public class ScoreController {
     private ScoreService scoreService;
 
     @GetMapping
-    public List<Score> getAllQuizzes() { return scoreService.getAllScore(); }
+    public List<Score> getAllScores() { return scoreService.getAllScore(); }
 
-    @GetMapping("/{id}")
-    public Score getQuizById (@PathVariable Long id) { return scoreService.getScoreById(id); }
-
-    @PutMapping("/{id}")
-    public void editScoreById (@PathVariable Long Id, @RequestBody Score NewScore) {
-        scoreService.editScoreById(Id,NewScore);
-    }
-
-    @PostMapping
-    public Score createScore(@RequestBody Score score) {
-        return scoreService.saveScore(score);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteScore (@PathVariable Long id) {
-        scoreService.deleteScore(id);
-    }
 }

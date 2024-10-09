@@ -21,6 +21,17 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    public User() {
+    }
+
+    public User(Long id, String name, String lastname, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+    }
+
     //Getters e Setters
 
     public Long getId() {
@@ -67,5 +78,6 @@ public class User {
         this.password = password;
         return this;
     }
+
 
 }

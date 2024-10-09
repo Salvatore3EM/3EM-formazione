@@ -6,6 +6,7 @@ import quiz_project.demo.model.Answer;
 import quiz_project.demo.repository.AnswersRepository;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,7 +28,8 @@ public class AnswerService {
         if (OldAnswer != null) {
             OldAnswer.setAnswer_text(NewAnswer.getAnswer_text());
             OldAnswer.setIs_correct(NewAnswer.getIs_correct());
-            OldAnswer.setCreated_at(NewAnswer.getCreated_at());
+            OldAnswer.setCreated_at(LocalDateTime.from(LocalDateTime.now()));
+            answersRepository.save(OldAnswer);
 
         }
     }

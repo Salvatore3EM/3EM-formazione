@@ -29,6 +29,7 @@ public class UserService {
             OldUser.setLastname(NewUser.getLastname());
             OldUser.setEmail(NewUser.getEmail());
             OldUser.setPassword(NewUser.getPassword());
+            userRepository.save(OldUser);
         }
     }
 
