@@ -3,6 +3,7 @@ package quiz_project.demo.model;
 import jakarta.persistence.*;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,7 @@ public class Quiz {
     private boolean visibility;
 
     @Column(name = "created_at")
-    private String created_at;
+    private LocalDateTime created_at;
 
     @ManyToOne
     Questions questions;
@@ -31,7 +32,7 @@ public class Quiz {
     public Quiz() {
     }
 
-    public Quiz(Long id, String title, boolean visibility, String created_at, Questions questions, Score scores) {
+    public Quiz(Long id, String title, boolean visibility, LocalDateTime created_at, Questions questions, Score scores) {
         this.id = id;
         this.title = title;
         this.visibility = visibility;
@@ -69,11 +70,11 @@ public class Quiz {
         return this;
     }
 
-    public String getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public Quiz setCreated_at(String created_at) {
+    public Quiz setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
         return this;
     }

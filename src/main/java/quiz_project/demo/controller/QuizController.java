@@ -35,4 +35,7 @@ public class QuizController {
     public void deleteQuiz (@PathVariable Long id) {
         quizService.deleteQuiz(id);
     }
+
+    @PostMapping("/toggleVisibility/{id}")
+    public void toggleVisibilityQuizById(@PathVariable Long id) { quizService.toggleVisibilityQuizById(id);}
 }

@@ -30,10 +30,9 @@ public class PinService {
         Pin OldPin = pinRepository.findById(id).orElse(null);
         if (OldPin != null) {
             OldPin.setPin_text(NewPin.getPin_text());
-            OldPin.setStart(NewPin.getStart());
-            OldPin.setEnd(NewPin.getEnd());
-
-
+            OldPin.setStart(LocalDateTime.from(LocalDateTime.now()));
+            OldPin.setEnd(LocalDateTime.from(LocalDateTime.now().plusHours(1)));
+            pinRepository.save(OldPin);
         }
     }
 
