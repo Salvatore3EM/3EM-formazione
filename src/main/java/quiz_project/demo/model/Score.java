@@ -29,6 +29,9 @@ public class Score {
     @ManyToMany
     List<Answer> answer_id;
 
+    public Score() {
+    }
+
     //Getters e Setters
 
     public Long getId() {

@@ -22,6 +22,16 @@ public class Pin {
     @Column(name = "end")
     private LocalDateTime end;
 
+    public Pin() {
+    }
+
+    public Pin(Long id, String pin_text, LocalDateTime start, LocalDateTime end) {
+        this.id = id;
+        this.pin_text = pin_text;
+        this.start = start;
+        this.end = end;
+    }
+
     //Getters e Setters
 
     public Long getId() {
@@ -56,6 +66,7 @@ public class Pin {
     public void setEnd(LocalDateTime end) {
         this.end = end;
     }
+
 }
 
 

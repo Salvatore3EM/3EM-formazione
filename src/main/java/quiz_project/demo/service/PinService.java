@@ -74,7 +74,31 @@ public class PinService {
         localPin.setPin_text(Pin_text);
         localPin.setStart(LocalDateTime.from(LocalDateTime.now()));
         localPin.setEnd(LocalDateTime.from(LocalDateTime.now().plusHours(1)));
+        if(localPin.getId()==null)
+        {
+            localPin.setId(1L);
+            pinRepository.save(localPin);
+        }
 
         return localPin;
+
+    }
+
+    public boolean checkPinVal(Pin NewPin) {
+        Pin OldPin = pinRepository.findById(1L).orElse(null);
+        if(NewPin.getPin_text().equals(OldPin.getPin_text()) && LocalDateTime.now().isBefore(OldPin.getEnd()) && LocalDateTime.now().isAfter(OldPin.getStart()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void extendTimePin() {
+        Pin OldPin = pinRepository.findById(1L).orElse(null);
+        OldPin.setEnd(OldPin.getEnd().plusHours(1));
+        pinRepository.save(OldPin);
     }
 }

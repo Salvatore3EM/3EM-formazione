@@ -27,6 +27,18 @@ public class Answer {
     @ManyToMany
     List<Score> scores;
 
+    public Answer() {
+    }
+
+    public Answer(Long id, String answer_text, boolean is_correct, String created_at, Questions question_id, List<Score> scores) {
+        this.id = id;
+        this.answer_text = answer_text;
+        this.is_correct = is_correct;
+        this.created_at = created_at;
+        this.question_id = question_id;
+        this.scores = scores;
+    }
+
     // Getters e Setters
 
     public Long getId() {
@@ -69,8 +81,15 @@ public class Answer {
         return question_id;
     }
 
-    public Answer setQuiz_id(Questions question_id) {
+    public void setQuestion_id(Questions question_id) {
         this.question_id = question_id;
-        return this;
+    }
+
+    public List<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(List<Score> scores) {
+        this.scores = scores;
     }
 }

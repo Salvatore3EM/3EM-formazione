@@ -31,10 +31,18 @@ public class PinController {
     public List<Pin> createPins(@RequestBody List<Pin> PinList) { return pinService.savePins(PinList); }
 
     @GetMapping("/generate")
-    public Pin generatePin() { return pinService.generatePin(); }
+    public Pin generatePin() {
+        return pinService.generatePin();
+    }
 
     @DeleteMapping("/{id}")
     public void deletePin(@PathVariable Long id) {
         pinService.deletePin(id);
     }
+
+    @PostMapping("/check")
+    public boolean checkPinVal(@RequestBody Pin NewPin){ return pinService.checkPinVal(NewPin); }
+
+        @PostMapping("/extend")
+        public void extendTimePin(){ pinService.extendTimePin();}
 }

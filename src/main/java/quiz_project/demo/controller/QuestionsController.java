@@ -23,8 +23,8 @@ public class QuestionsController {
     }
 
     @PutMapping("/{id}")
-    public void editQuestionById (@PathVariable Long Id, @RequestBody Questions NewQuestion) {
-        questionsService.editQuestionById(Id,NewQuestion);
+    public void editQuestionById (@PathVariable Long id, @RequestBody Questions NewQuestion) {
+        questionsService.editQuestionById(id,NewQuestion);
     }
 
     @PostMapping
@@ -39,5 +39,8 @@ public class QuestionsController {
     public void deleteQuestions(@PathVariable Long id) {
         questionsService.deleteQuestion(id);
     }
+
+    @PostMapping("/toggleVisibility/{id}")
+    public void toggleVisibilityQuestionById(@PathVariable Long id) { questionsService.toggleVisibilityQuestionById(id);}
 }
 

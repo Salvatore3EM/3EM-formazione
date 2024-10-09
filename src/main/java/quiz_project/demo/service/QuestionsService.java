@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import quiz_project.demo.model.Questions;
 import quiz_project.demo.repository.QuestionsRepository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,13 +29,15 @@ public class QuestionsService {
         if (OldQuestion != null) {
             OldQuestion.setQuestion_text(NewQuestion.getQuestion_text());
             OldQuestion.setVisibility(NewQuestion.getVisibility());
-            OldQuestion.setCreated_at(NewQuestion.getCreated_at());
-
+            OldQuestion.setCreated_at(LocalDateTime.from(LocalDateTime.now()));
+            questionsRepository.save(OldQuestion);
         }
     }
 
     public Questions saveQuestion(Questions question) {
+        question.setCreated_at(LocalDateTime.from(LocalDateTime.now()));
         return questionsRepository.save(question);
+
     }
 
     public List<Questions> saveQuestions(List<Questions> questionList) {
@@ -42,5 +46,18 @@ public class QuestionsService {
 
     public void deleteQuestion(Long id) {
         questionsRepository.deleteById(id);
+    }
+
+    public void toggleVisibilityQuestionById (Long id) {
+        Questions question = questionsRepository.findById(id).orElse(null);
+        if(question.getVisibility()==true) {
+            question.setVisibility(false);
+            questionsRepository.save(question);
+        }
+        else if (question.getVisibility()==false){
+            question.setVisibility(true);
+            questionsRepository.save(question);
+        }
+
     }
 }

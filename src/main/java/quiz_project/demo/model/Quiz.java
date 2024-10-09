@@ -28,6 +28,18 @@ public class Quiz {
     @ManyToOne
     Score scores;
 
+    public Quiz() {
+    }
+
+    public Quiz(Long id, String title, boolean visibility, String created_at, Questions questions, Score scores) {
+        this.id = id;
+        this.title = title;
+        this.visibility = visibility;
+        this.created_at = created_at;
+        this.questions = questions;
+        this.scores = scores;
+    }
+
     // Getters e Setters
 
     public Long getId() {
@@ -64,5 +76,21 @@ public class Quiz {
     public Quiz setCreated_at(String created_at) {
         this.created_at = created_at;
         return this;
+    }
+
+    public Questions getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Questions questions) {
+        this.questions = questions;
+    }
+
+    public Score getScores() {
+        return scores;
+    }
+
+    public void setScores(Score scores) {
+        this.scores = scores;
     }
 }
