@@ -22,7 +22,7 @@ public class Score {
     private String email;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private String created_at;
 
     @ManyToOne
     Quiz quiz_id;
@@ -33,7 +33,7 @@ public class Score {
     public Score() {
     }
 
-    public Score(Long id, String name, String lastname, String email, LocalDateTime created_at, Quiz quiz_id, List<Answer> answer_id) {
+    public Score(Long id, String name, String lastname, String email, String created_at, Quiz quiz_id, List<Answer> answer_id) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
@@ -81,11 +81,11 @@ public class Score {
         return this;
     }
 
-    public LocalDateTime getCreated_at() {
+    public String getCreated_at() {
         return created_at;
     }
 
-    public Score setCreated_at(LocalDateTime created_at) {
+    public Score setCreated_at(String created_at) {
         this.created_at = created_at;
         return this;
     }
