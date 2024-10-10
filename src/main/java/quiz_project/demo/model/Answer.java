@@ -20,7 +20,7 @@ public class Answer {
     private boolean is_correct;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private String created_at;
 
     @ManyToOne
     Questions question_id;
@@ -31,7 +31,7 @@ public class Answer {
     public Answer() {
     }
 
-    public Answer(Long id, String answer_text, boolean is_correct, LocalDateTime created_at, Questions question_id, List<Score> scores) {
+    public Answer(Long id, String answer_text, boolean is_correct, String created_at, Questions question_id, List<Score> scores) {
         this.id = id;
         this.answer_text = answer_text;
         this.is_correct = is_correct;
@@ -69,11 +69,11 @@ public class Answer {
         return this;
     }
 
-    public LocalDateTime getCreated_at() {
+    public String getCreated_at() {
         return created_at;
     }
 
-    public Answer setCreated_at(LocalDateTime created_at) {
+    public Answer setCreated_at(String created_at) {
         this.created_at = created_at;
         return this;
     }

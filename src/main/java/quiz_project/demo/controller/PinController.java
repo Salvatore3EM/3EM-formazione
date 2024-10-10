@@ -18,8 +18,8 @@ public class PinController {
     public List<Pin> getAllPin() { return pinService.getAllPins(); }
 
     @PutMapping("/{id}")
-    public void editPinById (@PathVariable Long Id, @RequestBody Pin NewPin) {
-        pinService.editPinById(Id,NewPin);
+    public void editPinById (@PathVariable Long id, @RequestBody Pin NewPin) {
+        pinService.editPinById(id,NewPin);
     }
 
     @PostMapping

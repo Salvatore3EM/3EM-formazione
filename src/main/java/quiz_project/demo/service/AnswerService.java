@@ -6,6 +6,7 @@ import quiz_project.demo.model.Answer;
 import quiz_project.demo.repository.AnswersRepository;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,18 +29,18 @@ public class AnswerService {
         if (OldAnswer != null) {
             OldAnswer.setAnswer_text(NewAnswer.getAnswer_text());
             OldAnswer.setIs_correct(NewAnswer.getIs_correct());
-            OldAnswer.setCreated_at(LocalDateTime.from(LocalDateTime.now()));
+            OldAnswer.setCreated_at(LocalDate.now().toString());
             answersRepository.save(OldAnswer);
 
         }
     }
 
     public Answer saveAnswer(Answer answer) {
+        answer.setCreated_at(LocalDate.now().toString());
         return answersRepository.save(answer);
     }
 
-    public List<Answer> saveAnswers(List<Answer> AnswerList) {
-        return answersRepository.saveAll(AnswerList);
+    public List<Answer> saveAnswers(List<Answer> AnswerList) { return answersRepository.saveAll(AnswerList);
     }
 
     public void deleteAnswer(Long id) {
