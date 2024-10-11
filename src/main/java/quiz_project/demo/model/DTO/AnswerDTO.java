@@ -1,8 +1,8 @@
 package quiz_project.demo.model.DTO;
 
 public class AnswerDTO {
-    String answer_text;
-    boolean is_correct;
+    public String answer_text;
+    public boolean is_correct;
 
     public AnswerDTO() {
     }
@@ -27,4 +27,5 @@ public class AnswerDTO {
     public void setIs_correct(boolean is_correct) {
         this.is_correct = is_correct;
     }
+
 }
