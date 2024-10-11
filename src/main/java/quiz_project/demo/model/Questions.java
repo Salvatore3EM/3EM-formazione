@@ -24,19 +24,16 @@ public class Questions {
     @ManyToOne
     Quiz quiz_id;
 
-    @OneToMany
-    List<Answer> answers;
 
     public Questions() {
     }
 
-    public Questions(Long id, String question_text, boolean visibility, String created_at, Quiz quiz_id, Answer answers) {
+    public Questions(Long id, String question_text, boolean visibility, String created_at, Quiz quiz_id) {
         this.id = id;
         this.question_text = question_text;
         this.visibility = visibility;
         this.created_at = created_at;
         this.quiz_id = quiz_id;
-        this.answers = (List<Answer>) answers;
     }
 
     // Getters e Setters
@@ -86,12 +83,5 @@ public class Questions {
         return this;
     }
 
-
-    public List<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
-    }
+    
 }

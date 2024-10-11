@@ -33,7 +33,7 @@ import java.util.List;
             }
         }
 
-        public Score saveScore (Score score) {
+        public Score submitScore (Score score) {
             score.setCreated_at(LocalDate.now().toString());
             return scoreRepository.save(score);
         }
