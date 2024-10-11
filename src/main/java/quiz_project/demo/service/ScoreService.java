@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import quiz_project.demo.model.Score;
 import quiz_project.demo.repository.ScoreRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,12 +28,13 @@ import java.util.List;
                 OldScore.setName(NewScore.getName());
                 OldScore.setLastname(NewScore.getLastname());
                 OldScore.setEmail(NewScore.getEmail());
-                OldScore.setCreated_at(LocalDateTime.from(LocalDateTime.now()));
+                OldScore.setCreated_at(LocalDate.now().toString());
                 scoreRepository.save(OldScore);
             }
         }
 
-        public Score saveScore (Score score) {
+        public Score submitScore (Score score) {
+            score.setCreated_at(LocalDate.now().toString());
             return scoreRepository.save(score);
         }
 
@@ -41,4 +43,3 @@ import java.util.List;
         }
 
     }
-

@@ -22,25 +22,25 @@ public class Score {
     private String email;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private String created_at;
 
     @ManyToOne
     Quiz quiz_id;
 
     @ManyToMany
-    List<Answer> answer_id;
+    List<Answer> answers;
 
     public Score() {
     }
 
-    public Score(Long id, String name, String lastname, String email, LocalDateTime created_at, Quiz quiz_id, List<Answer> answer_id) {
+    public Score(Long id, String name, String lastname, String email, String created_at, Quiz quiz_id, List<Answer> answers) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.created_at = created_at;
         this.quiz_id = quiz_id;
-        this.answer_id = answer_id;
+        this.answers = answers;
     }
 
     //Getters e Setters
@@ -81,13 +81,28 @@ public class Score {
         return this;
     }
 
-    public LocalDateTime getCreated_at() {
+    public String getCreated_at() {
         return created_at;
     }
 
-    public Score setCreated_at(LocalDateTime created_at) {
+    public Score setCreated_at(String created_at) {
         this.created_at = created_at;
         return this;
     }
 
+    public Quiz getQuiz_id() {
+        return quiz_id;
+    }
+
+    public void setQuiz_id(Quiz quiz_id) {
+        this.quiz_id = quiz_id;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
 }

@@ -29,13 +29,13 @@ public class QuestionsService {
         if (OldQuestion != null) {
             OldQuestion.setQuestion_text(NewQuestion.getQuestion_text());
             OldQuestion.setVisibility(NewQuestion.getVisibility());
-            OldQuestion.setCreated_at(LocalDateTime.from(LocalDateTime.now()));
+            OldQuestion.setCreated_at(LocalDate.now().toString());
             questionsRepository.save(OldQuestion);
         }
     }
 
     public Questions saveQuestion(Questions question) {
-        question.setCreated_at(LocalDateTime.from(LocalDateTime.now()));
+        question.setCreated_at(LocalDate.now().toString());
         return questionsRepository.save(question);
 
     }

@@ -23,10 +23,9 @@ public class AnswerController {
     }
 
     @PutMapping("/{id}")
-    public void editAnswerById (@PathVariable Long Id, @RequestBody Answer NewAnswer) {
-        answerService.editAnswerById(Id,NewAnswer);
+    public void editAnswerById (@PathVariable Long id, @RequestBody Answer NewAnswer) {
+        answerService.editAnswerById(id,NewAnswer);
     }
-
     @PostMapping
     public Answer createAnswer(@RequestBody Answer answer) {
         return answerService.saveAnswer(answer);

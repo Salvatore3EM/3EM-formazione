@@ -21,24 +21,17 @@ public class Quiz {
     private boolean visibility;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private String created_at;
 
-    @ManyToOne
-    Questions questions;
-
-    @ManyToOne
-    Score scores;
 
     public Quiz() {
     }
 
-    public Quiz(Long id, String title, boolean visibility, LocalDateTime created_at, Questions questions, Score scores) {
+    public Quiz(Long id, String title, boolean visibility, String created_at) {
         this.id = id;
         this.title = title;
         this.visibility = visibility;
         this.created_at = created_at;
-        this.questions = questions;
-        this.scores = scores;
     }
 
     // Getters e Setters
@@ -70,28 +63,13 @@ public class Quiz {
         return this;
     }
 
-    public LocalDateTime getCreated_at() {
+    public String getCreated_at() {
         return created_at;
     }
 
-    public Quiz setCreated_at(LocalDateTime created_at) {
+    public Quiz setCreated_at(String created_at) {
         this.created_at = created_at;
         return this;
     }
 
-    public Questions getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Questions questions) {
-        this.questions = questions;
-    }
-
-    public Score getScores() {
-        return scores;
-    }
-
-    public void setScores(Score scores) {
-        this.scores = scores;
-    }
 }

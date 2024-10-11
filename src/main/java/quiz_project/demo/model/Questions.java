@@ -2,7 +2,6 @@ package quiz_project.demo.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -20,24 +19,21 @@ public class Questions {
     private boolean visibility;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private String created_at;
 
     @ManyToOne
     Quiz quiz_id;
 
-    @OneToMany
-    List<Answer> answers;
 
     public Questions() {
     }
 
-    public Questions(Long id, String question_text, boolean visibility, LocalDateTime created_at, Quiz quiz_id, Answer answers) {
+    public Questions(Long id, String question_text, boolean visibility, String created_at, Quiz quiz_id) {
         this.id = id;
         this.question_text = question_text;
         this.visibility = visibility;
         this.created_at = created_at;
         this.quiz_id = quiz_id;
-        this.answers = (List<Answer>) answers;
     }
 
     // Getters e Setters
@@ -69,11 +65,11 @@ public class Questions {
         return this;
     }
 
-    public LocalDateTime getCreated_at() {
+    public String getCreated_at() {
         return created_at;
     }
 
-    public Questions setCreated_at(LocalDateTime created_at) {
+    public Questions setCreated_at(String created_at) {
         this.created_at = created_at;
         return this;
     }
@@ -87,12 +83,5 @@ public class Questions {
         return this;
     }
 
-
-    public List<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
-    }
+    
 }
