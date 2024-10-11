@@ -92,29 +92,32 @@ public class QuizService {
        return NewQuizList;
     }
 
-    public Object addQuiz(Long id_quiz, List<QuestionsDTO> quizList )
+    public Object addQuiz(int id_quiz, List<QuestionsDTO> questionList )
     {
-        List<Questions> NewQuestionsList = new ArrayList<Questions>();
-        List<Answer> NewAnswerList = new ArrayList<Answer>();
-        List<Object> addQuiz = new ArrayList<Object>();
-        for (int i=0;i<quizList.size();i++)
-        {
-            QuestionsDTO questionDTO = quizList.get(i);
-            Questions question = new Questions();
-            question.setQuestion_text(questionDTO.getQuestion_text());
-            question.setVisibility(questionDTO.isVisibility());
-            List<AnswerDTO> answerDTO = new ArrayList<>();
-            answerDTO = questionDTO.getAnswer();
-            Answer answer = new Answer();
-
-
-
-            question.setQuestion_text(questionDTO.getQuestion_text());
-            question.setCreated_at(LocalDate.now().toString());
-            NewQuestionsList.add(question);
-            questionRepository.saveAll(NewQuestionsList);
-            addQuiz.add(question);
-        }
+//        List<Questions> NewQuestionsList = new ArrayList<Questions>();
+//        List<Answer> NewAnswerList = new ArrayList<Answer>();
+//        List<Object> addQuiz = new ArrayList<Object>();
+//        for (int i=0;i<quizList.size();i++)
+//        {
+//            QuestionsDTO questionDTO = quizList.get(i);
+//            Questions question = new Questions();
+//            //question.setQuestion_text(questionDTO.getQuestion_text());
+//            ///question.setVisibility(questionDTO.isVisibility());
+//            question.setCreated_at(LocalDate.now().toString());
+//            List<AnswerDTO> answerDTOList;
+//            //answerDTOList = questionDTO.getAnswer();
+//            //AnswerDTO answerDTO = answerDTOList.get(i);
+//            Answer answer = new Answer();
+//            answer.setAnswer_text(answerDTO.getAnswer_text());
+//            answer.setIs_correct(answerDTO.isIs_correct());
+//            answer.setCreated_at(LocalDate.now().toString());
+//            NewQuestionsList.add(question);
+//            questionRepository.saveAll(NewQuestionsList);
+//            addQuiz.add(question);
+//            NewAnswerList.add(answer);
+//            answerRepository.saveAll(NewAnswerList);
+//            addQuiz.add(answer);
+        //}
 
        return null;
     }

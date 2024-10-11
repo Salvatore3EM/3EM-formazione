@@ -5,14 +5,18 @@ import quiz_project.demo.model.Answer;
 import java.util.List;
 
 public class QuestionsDTO {
-    String question_text;
-    boolean visibility;
-    List<AnswerDTO> Answer;
+     public String question_text;
+     public boolean visibility;
+     public List<AnswerDTO> answers;
+
+    public QuestionsDTO(){
+
+    }
 
     public QuestionsDTO(String question_text, boolean visibility, List<AnswerDTO> answer) {
         this.question_text = question_text;
         this.visibility = visibility;
-        Answer = answer;
+        this.answers = answer;
     }
 
     public String getQuestion_text() {
@@ -24,11 +28,11 @@ public class QuestionsDTO {
     }
 
     public List<AnswerDTO> getAnswer() {
-        return Answer;
+        return answers;
     }
 
     public void setAnswer(List<AnswerDTO> answer) {
-        Answer = answer;
+        answers = answer;
     }
 
     public boolean isVisibility() {
