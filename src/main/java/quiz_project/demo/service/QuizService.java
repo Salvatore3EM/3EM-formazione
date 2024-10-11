@@ -20,7 +20,9 @@ public class QuizService {
 
     @Autowired
     private QuizRepository quizRepository;
+    @Autowired
     private QuestionsRepository questionRepository;
+    @Autowired
     private AnswersRepository answerRepository;
 
     public List<Quiz> getAllQuizzes() {
@@ -92,35 +94,47 @@ public class QuizService {
        return NewQuizList;
     }
 
-    public Object addQuiz(int id_quiz, List<QuestionsDTO> questionList )
+    public Object addQuiz(Long id_quiz, List<QuestionsDTO> quizList )
     {
-//        List<Questions> NewQuestionsList = new ArrayList<Questions>();
-//        List<Answer> NewAnswerList = new ArrayList<Answer>();
-//        List<Object> addQuiz = new ArrayList<Object>();
-//        for (int i=0;i<quizList.size();i++)
-//        {
-//            QuestionsDTO questionDTO = quizList.get(i);
-//            Questions question = new Questions();
-//            //question.setQuestion_text(questionDTO.getQuestion_text());
-//            ///question.setVisibility(questionDTO.isVisibility());
-//            question.setCreated_at(LocalDate.now().toString());
-//            List<AnswerDTO> answerDTOList;
-//            //answerDTOList = questionDTO.getAnswer();
-//            //AnswerDTO answerDTO = answerDTOList.get(i);
-//            Answer answer = new Answer();
-//            answer.setAnswer_text(answerDTO.getAnswer_text());
-//            answer.setIs_correct(answerDTO.isIs_correct());
-//            answer.setCreated_at(LocalDate.now().toString());
-//            NewQuestionsList.add(question);
-//            questionRepository.saveAll(NewQuestionsList);
-//            addQuiz.add(question);
-//            NewAnswerList.add(answer);
-//            answerRepository.saveAll(NewAnswerList);
-//            addQuiz.add(answer);
-        //}
+        List<Questions> questions = new ArrayList<Questions>();
+        List<Questions> NewQuestion = new ArrayList<>();
+        List<Answer> answers = new ArrayList<Answer>();
+        List<Object> addQuiz = new ArrayList<Object>();
+        QuestionsDTO questionDTO = null;
+        AnswerDTO answerDTO = null;
+        List<AnswerDTO> answerDTOList;
+       for (int i=0;i<quizList.size();i++)
+        {
+            questionDTO = quizList.get(i);
 
-       return null;
+            Questions question = new Questions();
+            question.setQuestion_text(questionDTO.getQuestion_text());
+            question.setVisibility(questionDTO.isVisibility());
+            question.setCreated_at(LocalDate.now().toString());
+
+            question.setQuiz_id(quizRepository.findById(id_quiz).orElse(null));
+
+            questions.add(question);
+            addQuiz.add(question);
+
+            answerDTOList = questionDTO.getAnswer();
+
+            for(int j=0;j<answerDTOList.size();j++) {
+                answerDTO = answerDTOList.get(j);
+
+                Answer answer = new Answer();
+                answer.setAnswer_text(answerDTO.getAnswer_text());
+                answer.setIs_correct(answerDTO.isIs_correct());
+                answer.setCreated_at(LocalDate.now().toString());
+
+                answers.add(answer);
+                addQuiz.add(answer);
+            }
+        }
+
+         questionRepository.saveAll(questions);
+         answerRepository.saveAll(answers);
+         return addQuiz;
+
     }
-
 }
-

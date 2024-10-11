@@ -38,7 +38,7 @@ public class QuizController {
     public List<Quiz> createQuizzes(@RequestBody List<Quiz> quizList) { return quizService.saveQuizzes(quizList); }
 
     @PostMapping("/add/{id}")
-    public Object addQuiz(@PathVariable int id, @RequestBody List<QuestionsDTO> questions) {
+    public Object addQuiz(@PathVariable Long id, @RequestBody List<QuestionsDTO> questions) {
         return quizService.addQuiz(id,questions); }
 
     @DeleteMapping("/{id}")

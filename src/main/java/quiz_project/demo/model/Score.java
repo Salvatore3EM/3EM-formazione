@@ -28,19 +28,19 @@ public class Score {
     Quiz quiz_id;
 
     @ManyToMany
-    List<Answer> answer_id;
+    List<Answer> answers;
 
     public Score() {
     }
 
-    public Score(Long id, String name, String lastname, String email, String created_at, Quiz quiz_id, List<Answer> answer_id) {
+    public Score(Long id, String name, String lastname, String email, String created_at, Quiz quiz_id, List<Answer> answers) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.created_at = created_at;
         this.quiz_id = quiz_id;
-        this.answer_id = answer_id;
+        this.answers = answers;
     }
 
     //Getters e Setters
@@ -90,4 +90,19 @@ public class Score {
         return this;
     }
 
+    public Quiz getQuiz_id() {
+        return quiz_id;
+    }
+
+    public void setQuiz_id(Quiz quiz_id) {
+        this.quiz_id = quiz_id;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
 }
