@@ -1,30 +1,28 @@
 package quiz_project.demo.model.DTO;
 
-import quiz_project.demo.model.Answer;
-
 import java.util.List;
 
 public class QuestionsDTO {
-     public String question_text;
-     public boolean visibility;
-     public List<AnswerDTO> answers;
+    private String questionTitle;
+    private boolean visibility = true;
+    private List<AnswerDTO> answers;
 
-    public QuestionsDTO(){
+    public QuestionsDTO() {
 
     }
 
-    public QuestionsDTO(String question_text, boolean visibility, List<AnswerDTO> answer) {
-        this.question_text = question_text;
+    public QuestionsDTO(String questionTitle, boolean visibility, List<AnswerDTO> answer) {
+        this.questionTitle = questionTitle;
         this.visibility = visibility;
         this.answers = answer;
     }
 
     public String getQuestion_text() {
-        return question_text;
+        return questionTitle;
     }
 
-    public void setQuestion_text(String question_text) {
-        this.question_text = question_text;
+    public void setQuestion_text(String answerTitle) {
+        this.questionTitle = questionTitle;
     }
 
     public List<AnswerDTO> getAnswer() {

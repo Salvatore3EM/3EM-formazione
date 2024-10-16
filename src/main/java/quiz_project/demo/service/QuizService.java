@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import quiz_project.demo.model.Answer;
 import quiz_project.demo.model.DTO.AnswerDTO;
 import quiz_project.demo.model.DTO.QuestionsDTO;
+import quiz_project.demo.model.DTO.QuizDTO;
 import quiz_project.demo.model.Questions;
 import quiz_project.demo.model.Quiz;
 import quiz_project.demo.repository.AnswersRepository;
@@ -94,27 +95,39 @@ public class QuizService {
        return NewQuizList;
     }
 
-    public Object addQuiz(Long id_quiz, List<QuestionsDTO> quizList )
+    public Object addQuiz(QuizDTO quiz )
     {
+
         List<Questions> questions = new ArrayList<Questions>();
         List<Questions> NewQuestion = new ArrayList<>();
         List<Answer> answers = new ArrayList<Answer>();
         List<Object> addQuiz = new ArrayList<Object>();
         QuestionsDTO questionDTO = null;
+        List<QuestionsDTO> questionsDTOList;
         AnswerDTO answerDTO = null;
         List<AnswerDTO> answerDTOList;
-       for (int i=0;i<quizList.size();i++)
+        Quiz NewQuiz = new Quiz();
+
+        NewQuiz.setTitle(quiz.getTitle());
+        NewQuiz.setVisibility(quiz.isVisibility());
+        NewQuiz.setCreated_at(LocalDate.now().toString());
+        addQuiz.add(NewQuiz);
+        quizRepository.save(NewQuiz);
+
+        questionsDTOList = quiz.getQuestions();
+
+       for (int i=0;i<questionsDTOList.size();i++)
         {
-            questionDTO = quizList.get(i);
+            questionDTO = questionsDTOList.get(i);
 
             Questions question = new Questions();
             question.setQuestion_text(questionDTO.getQuestion_text());
             question.setVisibility(questionDTO.isVisibility());
             question.setCreated_at(LocalDate.now().toString());
 
-            question.setQuiz_id(quizRepository.findById(id_quiz).orElse(null));
+            question.setQuiz_id(quizRepository.findById(NewQuiz.getId()).orElse(null));
 
-            questions.add(question);
+            questionRepository.save(question);
             addQuiz.add(question);
 
             answerDTOList = questionDTO.getAnswer();
@@ -126,14 +139,14 @@ public class QuizService {
                 answer.setAnswer_text(answerDTO.getAnswer_text());
                 answer.setIs_correct(answerDTO.isIs_correct());
                 answer.setCreated_at(LocalDate.now().toString());
+                answer.setQuestion_id(questionRepository.findById(question.getId()).orElse(null));
 
-                answers.add(answer);
+                answerRepository.save(answer);
                 addQuiz.add(answer);
             }
         }
 
-         questionRepository.saveAll(questions);
-         answerRepository.saveAll(answers);
+
          return addQuiz;
 
     }

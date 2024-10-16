@@ -2,7 +2,7 @@ package quiz_project.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import quiz_project.demo.model.Questions;
+import quiz_project.demo.model.DTO.ScoreDTO;
 import quiz_project.demo.model.Score;
 import quiz_project.demo.service.ScoreService;
 
@@ -16,11 +16,13 @@ public class ScoreController {
     private ScoreService scoreService;
 
     @GetMapping
-    public List<Score> getAllScores() { return scoreService.getAllScore(); }
+    public List<Score> getAllScores() {
+        return scoreService.getAllScore();
+    }
 
     @PostMapping("/submit")
-    public Score createQuestion(@RequestBody Score score) {
-        return scoreService.submitScore(score);
+    public Score createQuestion(@RequestBody ScoreDTO scoreDTO) {
+        return scoreService.submitScore(scoreDTO);
     }
 
 }

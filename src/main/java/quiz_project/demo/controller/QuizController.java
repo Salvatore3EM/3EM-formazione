@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import quiz_project.demo.model.Answer;
 import quiz_project.demo.model.DTO.QuestionsDTO;
+import quiz_project.demo.model.DTO.QuizDTO;
 import quiz_project.demo.model.Questions;
 import quiz_project.demo.model.Quiz;
 import quiz_project.demo.service.QuizService;
@@ -37,9 +38,9 @@ public class QuizController {
     @PostMapping("/All")
     public List<Quiz> createQuizzes(@RequestBody List<Quiz> quizList) { return quizService.saveQuizzes(quizList); }
 
-    @PostMapping("/add/{id}")
-    public Object addQuiz(@PathVariable Long id, @RequestBody List<QuestionsDTO> questions) {
-        return quizService.addQuiz(id,questions); }
+    @PostMapping("/add")
+    public Object addQuiz(@RequestBody QuizDTO quiz) {
+        return quizService.addQuiz(quiz); }
 
     @DeleteMapping("/{id}")
     public void deleteQuiz (@PathVariable Long id) {
