@@ -1,13 +1,15 @@
 package quiz_project.demo.model.DTO;
 
 public class AnswerDTO {
-    public String text;
-    public boolean isCorrect;
+    private Long answer_id;
+    private String text;
+    private boolean isCorrect;
 
     public AnswerDTO() {
     }
 
-    public AnswerDTO(String text, boolean isCorrect) {
+    public AnswerDTO(Long answer_id, String text, boolean isCorrect) {
+        this.answer_id = answer_id;
         this.text = text;
         this.isCorrect = isCorrect;
     }
@@ -28,4 +30,11 @@ public class AnswerDTO {
         this.isCorrect = isCorrect;
     }
 
+    public Long getAnswer_id() {
+        return answer_id;
+    }
+
+    public void setAnswer_id(Long answer_id) {
+        this.answer_id = answer_id;
+    }
 }
