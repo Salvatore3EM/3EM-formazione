@@ -5,26 +5,26 @@ import quiz_project.demo.model.Answer;
 import java.util.List;
 
 public class QuestionsDTO {
-     public String question_text;
-     public boolean visibility;
+     public String answerTitle;
+     public boolean visibility = true;
      public List<AnswerDTO> answers;
 
     public QuestionsDTO(){
 
     }
 
-    public QuestionsDTO(String question_text, boolean visibility, List<AnswerDTO> answer) {
-        this.question_text = question_text;
+    public QuestionsDTO(String answerTitle, boolean visibility, List<AnswerDTO> answer) {
+        this.answerTitle = answerTitle;
         this.visibility = visibility;
         this.answers = answer;
     }
 
     public String getQuestion_text() {
-        return question_text;
+        return answerTitle;
     }
 
-    public void setQuestion_text(String question_text) {
-        this.question_text = question_text;
+    public void setQuestion_text(String answerTitle) {
+        this.answerTitle = answerTitle;
     }
 
     public List<AnswerDTO> getAnswer() {
