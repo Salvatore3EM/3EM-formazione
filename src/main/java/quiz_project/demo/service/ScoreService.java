@@ -59,6 +59,7 @@ public class ScoreService {
         List<Answer> answerList = new ArrayList<>();
         Answer OldAnswer = new Answer();
         Long Idans = 0L;
+        int errore = 0;
 
         for (int j = 0; j < scoreDTO.getAnswers().size(); j++) {
             answerDTOList = scoreDTO.getAnswers();
@@ -75,14 +76,17 @@ public class ScoreService {
             answer = answerRepository.findById(Idans).orElse(null);
             answerList.add(answer);
             if (OldAnswer.getQuestion_id().equals(answer.getQuestion_id())) {
+                errore = errore + 1;
                 return null;
+
             }
             OldAnswer = answer;
         }
-
-        score.setAnswers(answerList);
-
-        return scoreRepository.save(score);
+        if (errore == 0) {
+            score.setAnswers(answerList);
+            return scoreRepository.save(score);
+        }
+        return null;
     }
 
     public void deleteScore(Long id) {
