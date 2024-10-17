@@ -10,6 +10,7 @@ import quiz_project.demo.repository.AnswersRepository;
 import quiz_project.demo.repository.QuizRepository;
 import quiz_project.demo.repository.ScoreRepository;
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +88,10 @@ public class ScoreService {
             return scoreRepository.save(score);
         }
         return null;
+    }
+
+    public void ScoreExport(){
+
     }
 
     public void deleteScore(Long id) {
