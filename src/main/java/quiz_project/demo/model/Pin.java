@@ -16,10 +16,10 @@ public class Pin {
     @Column(name = "pin_text")
     private String pin_text;
 
-    @Column(name = "start")
+    @Column(name = "start_time")
     private LocalDateTime start;
 
-    @Column(name = "end")
+    @Column(name = "end_time")
     private LocalDateTime end;
 
     public Pin() {
