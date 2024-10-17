@@ -1,9 +1,9 @@
 package quiz_project.demo.model.DTO;
 
 public class AnswerDTO {
-    private Long answer_id;
-    private String text;
-    private boolean isCorrect;
+    public Long answer_id;
+    public String text;
+    public boolean isCorrect;
 
     public AnswerDTO() {
     }
