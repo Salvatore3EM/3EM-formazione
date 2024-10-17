@@ -2,9 +2,9 @@ package quiz_project.demo.model.DTO;
 import java.util.List;
 
 public class QuizDTO {
-    private String quizTitle;
-    private boolean visibility = true;
-    private List<QuestionsDTO> questions;
+    public String quizTitle;
+    public boolean visibility = true;
+    public List<QuestionsDTO> questions;
 
     public QuizDTO() {
     }

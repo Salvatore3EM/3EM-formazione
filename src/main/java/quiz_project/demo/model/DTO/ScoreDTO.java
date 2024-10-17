@@ -4,11 +4,11 @@ import java.util.List;
 
 
 public class ScoreDTO {
-    private Long quiz_id;
-    private String nome;
-    private String cognome;
-    private String email;
-    private List<AnswerDTO> answers;
+    public Long quiz_id;
+    public String nome;
+    public String cognome;
+    public String email;
+    public List<AnswerDTO> answers;
 
     public ScoreDTO() {
     }
