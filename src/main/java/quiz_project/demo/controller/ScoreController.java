@@ -23,7 +23,7 @@ public class ScoreController {
     }
 
     @PostMapping("/submit")
-    public ResponseEntity<String> createQuestion(@RequestBody ScoreDTO scoreDTO) {
+    public ResponseEntity<String> submitScore(@RequestBody ScoreDTO scoreDTO) {
         if(scoreService.submitScore(scoreDTO) != null)
         {
             return new ResponseEntity<>("Score saved with success", HttpStatus.OK);
