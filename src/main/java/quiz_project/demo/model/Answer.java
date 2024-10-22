@@ -1,8 +1,7 @@
 package quiz_project.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -23,21 +22,19 @@ public class Answer {
     private String created_at;
 
     @ManyToOne
-    Questions question_id;
-
-    @ManyToMany
-    List<Score> scores;
+    @JoinColumn(name = "question_id")
+    @JsonIgnore
+    private Question question;
 
     public Answer() {
     }
 
-    public Answer(Long id, String answer_text, boolean is_correct, String created_at, Questions question_id, List<Score> scores) {
+    public Answer(Long id, String answer_text, boolean is_correct, String created_at, Question question) {
         this.id = id;
         this.answer_text = answer_text;
         this.is_correct = is_correct;
         this.created_at = created_at;
-        this.question_id = question_id;
-        this.scores = scores;
+        this.question = question;
     }
 
     // Getters e Setters
@@ -78,19 +75,12 @@ public class Answer {
         return this;
     }
 
-    public Questions getQuestion_id() {
-        return question_id;
+    public Question getQuestion() {  // Cambiato da getQuestion_id a getQuestion
+        return question;
     }
 
-    public void setQuestion_id(Questions question_id) {
-        this.question_id = question_id;
-    }
-
-    public List<Score> getScores() {
-        return scores;
-    }
-
-    public void setScores(List<Score> scores) {
-        this.scores = scores;
+    public Answer setQuestion(Question question) {  // Cambiato da setQuestion_id a setQuestion
+        this.question = question;
+        return this;
     }
 }

@@ -1,48 +1,60 @@
 package quiz_project.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
+import quiz_project.demo.model.DTO.Pin.AuthenticationResponseDTO;
 import quiz_project.demo.model.Pin;
 import quiz_project.demo.service.PinService;
-
-import java.util.List;
+import quiz_project.demo.utils.JWTUtil;
 
 @RestController
-@RequestMapping("/api/Pin")
+@RequestMapping("/api/pin")
 public class PinController {
+    @Autowired
+    private JWTUtil jwtUtil;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private PinService pinService;
 
-    @GetMapping
-    public List<Pin> getAllPin() { return pinService.getAllPins(); }
-
-    @PutMapping("/{id}")
-    public void editPinById (@PathVariable Long id, @RequestBody Pin NewPin) {
-        pinService.editPinById(id,NewPin);
+    // Endpoint per la creazione di un nuovo PIN
+    @PostMapping("/generate")
+    public ResponseEntity<Pin> generatePin() {
+        Pin pin = pinService.generatePin();
+        return ResponseEntity.ok(pin);
     }
 
-    @PostMapping
-    public Pin createPin(@RequestBody Pin pin) {
-        return pinService.savePin(pin);
+    // Endpoint per visualizzare un PIN esistente
+    @GetMapping()
+    public ResponseEntity<Pin> getPin() {
+        Pin pin = pinService.getPin();
+        if (pin != null) {
+            return ResponseEntity.ok(pin);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @PostMapping("/All")
-    public List<Pin> createPins(@RequestBody List<Pin> PinList) { return pinService.savePins(PinList); }
-
-    @GetMapping("/generate")
-    public Pin generatePin() {
-        return pinService.generatePin();
+    // Endpoint per estendere la validità di un PIN
+    @PutMapping("/extend")
+    public ResponseEntity<Void> extendPinValidity() {
+        pinService.extendTimePin();
+        return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
-    public void deletePin(@PathVariable Long id) {
-        pinService.deletePin(id);
-    }
-
-    @PostMapping("/check")
-    public boolean checkPinVal(@RequestBody Pin NewPin){ return pinService.checkPinVal(NewPin); }
-
-        @PostMapping("/extend")
-        public void extendTimePin(){ pinService.extendTimePin();}
+    // Endpoint per verificare se un PIN è valido
+//    @PostMapping("/check")
+//    public ResponseEntity<AuthenticationResponseDTO> checkPinValidity(@RequestParam String pinText) {
+//        boolean isValid = pinService.checkPinVal(pinText);
+//        if (isValid) {
+//            String jwt = jwtUtil.generateToken("guest", "ROLE_GUEST");
+//            return ResponseEntity.ok(new AuthenticationResponseDTO(jwt));
+//        } else {
+//            return ResponseEntity.status(401).body(new AuthenticationResponseDTO("Invalid PIN"));
+//        }
+//    }
 }

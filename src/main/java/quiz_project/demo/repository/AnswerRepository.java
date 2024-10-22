@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import quiz_project.demo.model.Answer;
 
 @Repository
-public interface AnswersRepository extends JpaRepository<Answer, Long> {
+public interface AnswerRepository extends JpaRepository<Answer, Long> {
 }

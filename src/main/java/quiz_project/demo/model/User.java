@@ -5,79 +5,57 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(nullable = false, unique = true)
+    private String username;
 
-    @Column(name = "lastname")
-    private String lastname;
-
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "password")
+    @Column(nullable = false)
     private String password;
 
-    public User() {
-    }
+    @Column(nullable = false)
+    private String role;  // "ROLE_ADMIN" "ROLE_GUEST"
 
-    public User(Long id, String name, String lastname, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.lastname = lastname;
-        this.email = email;
+    public User() {}
+
+    public User(String username, String password, String role) {
+        this.username = username;
         this.password = password;
+        this.role = role;
     }
-
-    //Getters e Setters
 
     public Long getId() {
         return id;
     }
 
-    public User setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public User setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public User setLastname(String lastname) {
-        this.lastname = lastname;
-        return this;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public User setEmail(String email) {
-        this.email = email;
-        return this;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public User setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
-        return this;
     }
 
+    public String getRole() {
+        return role;
+    }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

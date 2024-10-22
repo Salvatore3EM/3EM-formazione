@@ -1,153 +1,16 @@
 package quiz_project.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import quiz_project.demo.model.Answer;
-import quiz_project.demo.model.DTO.AnswerDTO;
-import quiz_project.demo.model.DTO.QuestionsDTO;
-import quiz_project.demo.model.DTO.QuizDTO;
-import quiz_project.demo.model.Questions;
+import quiz_project.demo.model.DTO.Quiz.QuestionDTO;
+import quiz_project.demo.model.DTO.Quiz.QuizDTO;
 import quiz_project.demo.model.Quiz;
-import quiz_project.demo.repository.AnswersRepository;
-import quiz_project.demo.repository.QuestionsRepository;
-import quiz_project.demo.repository.QuizRepository;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class QuizService {
+public interface QuizService {
+    Quiz createQuiz(QuizDTO quizDTO);
+    Quiz updateQuestion(Long questionId, QuestionDTO questionDTO);
+    void addQuestions(Long quizId, List<QuestionDTO> questionDTOs);
+    List<Quiz> getAllQuizzes();
+    QuizDTO getQuizById(Long quizId);
 
-    @Autowired
-    private QuizRepository quizRepository;
-    @Autowired
-    private QuestionsRepository questionRepository;
-    @Autowired
-    private AnswersRepository answerRepository;
-
-    public List<Quiz> getAllQuizzes() {
-        return quizRepository.findAll();
-    }
-
-    public Quiz getQuizById(Long id) {
-        return quizRepository.findById(id).orElse(null);
-    }
-
-    public void editQuizById(Long id, Quiz NewQuiz) {
-        Quiz OldQuiz = quizRepository.findById(id).orElse(null);
-        if(OldQuiz != null)
-        {
-            OldQuiz.setTitle(NewQuiz.getTitle());
-            OldQuiz.setVisibility(NewQuiz.getVisibility());
-            OldQuiz.setCreated_at(LocalDate.now().toString());
-            quizRepository.save(OldQuiz);
-        }
-    }
-
-    public Quiz saveQuiz (Quiz quiz) {
-        quiz.setCreated_at(LocalDate.now().toString());
-        return quizRepository.save(quiz);
-    }
-
-    public List<Quiz> saveQuizzes(List<Quiz> quizList) {
-        List<Quiz> NewQuizList = new ArrayList<Quiz>();
-        for (int i=0;i<quizList.size();i++)
-        {
-            Quiz quiz = quizList.get(i);
-            quiz.setCreated_at(LocalDate.now().toString());
-            NewQuizList.add(quiz);
-            quizRepository.saveAll(NewQuizList);
-
-        }
-
-        return NewQuizList;
-    }
-
-    public void deleteQuiz(Long id) {
-        quizRepository.deleteById(id);
-    }
-
-    public void toggleVisibilityQuizById (Long id) {
-        Quiz quiz = quizRepository.findById(id).orElse(null);
-        if(quiz.getVisibility()==true) {
-            quiz.setVisibility(false);
-            quizRepository.save(quiz);
-        }
-        else if (quiz.getVisibility()==false){
-            quiz.setVisibility(true);
-            quizRepository.save(quiz);
-        }
-
-    }
-
-    public List<Quiz> AllQuizVisible() {
-        List<Quiz> NewQuizList = new ArrayList<Quiz>();
-        List<Quiz> Quizzes = quizRepository.findAll();
-       for (int i=0;i<Quizzes.size();i++)
-       {
-           Quiz quiz = Quizzes.get(i);
-           if(quiz.getVisibility()==true)
-           {
-               NewQuizList.add(quiz);
-           }
-       }
-       return NewQuizList;
-    }
-
-    public Object addQuiz(QuizDTO quiz )
-    {
-
-        List<Questions> questions = new ArrayList<Questions>();
-        List<Questions> NewQuestion = new ArrayList<>();
-        List<Answer> answers = new ArrayList<Answer>();
-        List<Object> addQuiz = new ArrayList<Object>();
-        QuestionsDTO questionDTO = null;
-        List<QuestionsDTO> questionsDTOList;
-        AnswerDTO answerDTO = null;
-        List<AnswerDTO> answerDTOList;
-        Quiz NewQuiz = new Quiz();
-
-        NewQuiz.setTitle(quiz.getTitle());
-        NewQuiz.setVisibility(quiz.isVisibility());
-        NewQuiz.setCreated_at(LocalDate.now().toString());
-        addQuiz.add(NewQuiz);
-        quizRepository.save(NewQuiz);
-
-        questionsDTOList = quiz.getQuestions();
-
-       for (int i=0;i<questionsDTOList.size();i++)
-        {
-            questionDTO = questionsDTOList.get(i);
-
-            Questions question = new Questions();
-            question.setQuestion_text(questionDTO.getQuestion_text());
-            question.setVisibility(questionDTO.isVisibility());
-            question.setCreated_at(LocalDate.now().toString());
-
-            question.setQuiz_id(quizRepository.findById(NewQuiz.getId()).orElse(null));
-
-            questionRepository.save(question);
-            addQuiz.add(question);
-
-            answerDTOList = questionDTO.getAnswer();
-
-            for(int j=0;j<answerDTOList.size();j++) {
-                answerDTO = answerDTOList.get(j);
-
-                Answer answer = new Answer();
-                answer.setAnswer_text(answerDTO.getAnswer_text());
-                answer.setIs_correct(answerDTO.isIs_correct());
-                answer.setCreated_at(LocalDate.now().toString());
-                answer.setQuestion_id(questionRepository.findById(question.getId()).orElse(null));
-
-                answerRepository.save(answer);
-                addQuiz.add(answer);
-            }
-        }
-
-
-         return addQuiz;
-
-    }
 }

@@ -1,5 +1,6 @@
 package quiz_project.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -25,10 +26,18 @@ public class Score {
     private String created_at;
 
     @ManyToOne
-    Quiz quiz_id;
+    @JoinColumn(name = "quiz_id")
+    @JsonIgnore
+    private Quiz quiz;
 
     @ManyToMany
-    List<Answer> answers;
+    @JoinTable(
+            name = "score_answers",
+            joinColumns = @JoinColumn(name = "score_id"),
+            inverseJoinColumns = @JoinColumn(name = "answer_id")
+    )
+    @JsonIgnore
+    private List<Answer> answers;
 
     public Score() {
     }
@@ -39,7 +48,7 @@ public class Score {
         this.lastname = lastname;
         this.email = email;
         this.created_at = created_at;
-        this.quiz_id = quiz_id;
+        this.quiz = quiz_id;
         this.answers = answers;
     }
 
@@ -91,11 +100,11 @@ public class Score {
     }
 
     public Quiz getQuiz_id() {
-        return quiz_id;
+        return quiz;
     }
 
-    public void setQuiz_id(Quiz quiz_id) {
-        this.quiz_id = quiz_id;
+    public void setQuiz_id(Quiz quiz) {
+        this.quiz = quiz;
     }
 
     public List<Answer> getAnswers() {

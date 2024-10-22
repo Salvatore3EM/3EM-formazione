@@ -1,55 +1,49 @@
 package quiz_project.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import quiz_project.demo.model.Answer;
-import quiz_project.demo.model.DTO.QuestionsDTO;
-import quiz_project.demo.model.DTO.QuizDTO;
-import quiz_project.demo.model.Questions;
+import quiz_project.demo.model.DTO.Quiz.QuestionDTO;
+import quiz_project.demo.model.DTO.Quiz.QuizDTO;
 import quiz_project.demo.model.Quiz;
 import quiz_project.demo.service.QuizService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/Quiz")
+@RequestMapping("/api/quizzes")
 public class QuizController {
 
     @Autowired
     private QuizService quizService;
 
-    @GetMapping
-    public List<Quiz> getAllQuizzes() { return quizService.getAllQuizzes(); }
-
-    @GetMapping("/{id}")
-    public Quiz getQuizById (@PathVariable Long id) {
-        return quizService.getQuizById(id);
+    @PostMapping("/create")
+    public ResponseEntity<Quiz> createQuiz(@RequestBody QuizDTO quizDTO) {
+        Quiz quiz = quizService.createQuiz(quizDTO);
+        return ResponseEntity.ok(quiz);
     }
 
-    @PutMapping("/{id}")
-    public void editQuizById (@PathVariable Long id, @RequestBody Quiz NewQuiz) {
-        quizService.editQuizById(id,NewQuiz);
-    }
-    @PostMapping
-    public Quiz createQuiz(@RequestBody Quiz quiz) {
-        return quizService.saveQuiz(quiz);
+    @PutMapping("/question/{id}")
+    public ResponseEntity<Quiz> updateQuestion(@PathVariable Long id, @RequestBody QuestionDTO questionDTO) {
+        Quiz quiz = quizService.updateQuestion(id, questionDTO);
+        return ResponseEntity.ok(quiz);
     }
 
-    @PostMapping("/All")
-    public List<Quiz> createQuizzes(@RequestBody List<Quiz> quizList) { return quizService.saveQuizzes(quizList); }
-
-    @PostMapping("/add")
-    public Object addQuiz(@RequestBody QuizDTO quiz) {
-        return quizService.addQuiz(quiz); }
-
-    @DeleteMapping("/{id}")
-    public void deleteQuiz (@PathVariable Long id) {
-        quizService.deleteQuiz(id);
+    @PostMapping("/{quizId}/questions")
+    public ResponseEntity<Void> addQuestions(@PathVariable Long quizId, @RequestBody List<QuestionDTO> questionDTOs) {
+        quizService.addQuestions(quizId, questionDTOs);
+        return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/toggleVisibility/{id}")
-    public void toggleVisibilityQuizById(@PathVariable Long id) { quizService.toggleVisibilityQuizById(id);}
+    @GetMapping("/all")
+    public ResponseEntity<List<Quiz>> getAllQuizzes() {
+        List<Quiz> quizzes = quizService.getAllQuizzes();
+        return ResponseEntity.ok(quizzes);
+    }
 
-    @GetMapping("/AllVisible")
-    public List<Quiz> AllQuizVisible() { return quizService.AllQuizVisible(); }
+    @GetMapping("/{quizId}")
+    public ResponseEntity<QuizDTO> getQuizById(@PathVariable Long quizId) {
+        QuizDTO quizDTO = quizService.getQuizById(quizId);
+        return ResponseEntity.ok(quizDTO);
+    }
 }

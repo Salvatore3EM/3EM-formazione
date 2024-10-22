@@ -1,25 +1,26 @@
-package quiz_project.demo.model.DTO;
+package quiz_project.demo.model.DTO.Quiz;
+
 import java.util.List;
 
 public class QuizDTO {
-    public String quizTitle;
-    public boolean visibility = true;
-    public List<QuestionsDTO> questions;
+    private String quizTitle;
+    private boolean visibility;
+    private List<QuestionDTO> questions;
 
     public QuizDTO() {
     }
 
-    public QuizDTO(String quizTitle, boolean visibility, List<QuestionsDTO> questions) {
+    public QuizDTO(String quizTitle, boolean visibility, List<QuestionDTO> questions) {
         this.quizTitle = quizTitle;
         this.visibility = visibility;
         this.questions = questions;
     }
 
-    public String getTitle() {
+    public String getQuizTitle() {
         return quizTitle;
     }
 
-    public void setTitle(String quizTitle) {
+    public void setQuizTitle(String quizTitle) {
         this.quizTitle = quizTitle;
     }
 
@@ -31,13 +32,11 @@ public class QuizDTO {
         this.visibility = visibility;
     }
 
-    public List<QuestionsDTO> getQuestions() {
+    public List<QuestionDTO> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<QuestionsDTO> questions) {
+    public void setQuestions(List<QuestionDTO> questions) {
         this.questions = questions;
     }
 }
-
-

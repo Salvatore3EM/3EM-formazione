@@ -1,9 +1,6 @@
 package quiz_project.demo.model;
 
 import jakarta.persistence.*;
-
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -23,6 +20,8 @@ public class Quiz {
     @Column(name = "created_at")
     private String created_at;
 
+    @OneToMany(mappedBy = "quiz_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Relazione OneToMany con le domande
+    private List<Question> questions; // Lista di domande associate al quiz
 
     public Quiz() {
     }
@@ -72,4 +71,11 @@ public class Quiz {
         return this;
     }
 
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
 }
